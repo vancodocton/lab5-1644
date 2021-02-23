@@ -1,26 +1,24 @@
 <?php
 	session_start();
-	include('backend/dbConnect.php');
-	if (isset($_POST['signin'])
+	if (isset($_POST['signin']))
 	{
+		include('backend/dbConnect.php');
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
-		$querry = 'select * from "Accounts" where "Username" = ' + $username;
-		$result = pg_query($dbserver, $query);
+		$query = "SELECT * FROM accounts WHERE username = '$username'";
+		$result = pg_query($dbServer, $query);
 		
-		$account = pg_fetch_row($result);
-		if (!$accout or is_null($account))
+
+		$account = pg_fetch_assoc($result);
+		if ($account or is_null($account))
 		{
-			if ($account['Password'] == $password)
+			if ($account['password'] == $password)
 			{
-				echo 'login succeess';
-				$_SESSION['account_id'] = $account['d'];
-				exit();
-			}
-			else
-			{
-				echo 'login failure';				
+				$_SESSION['account_id'] = $account['id'];
+				$uri = $_SERVER['HTTP_HOST'];
+				header('Location: ' . $uri . '/lab5-1644/');
+				exit;
 			}
 		}
 	}
@@ -42,18 +40,22 @@
     <form class="w-100 m-auto p-3" style="max-width: 330px;" method="post" action="">
 		<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 		<h1 class="mb-4">Please sign in</h1>
-		<input type="username" name="username" class="form-control mb-1" placeholder="Username" required autofocus>
+		<input type="username" name="username" class="form-control mb-1" placeholder="Username" required autofocus value="<?php echo isset($_POST['signin'])? $username:''; ?>">
 		<input type="password" name="password" class="form-control mb-1" placeholder="Password" required>
 		<div class="form-check mt-1 mb-3 text-left">
 			<input type="checkbox" value="remember-me"> 
 			<label for="remember-me"> Remember me</label>
-		</div>
+		</div>		
+		<?php
+			if (isset($_POST['signin']) && isset($_SESSION['account_id']))
+				echo '<p class="text-danger">Wrong account credential</p>';
+		?>		
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
     </form>
 
 	<footer class="container my-2 pt-5 text-muted text-center">
 		<div>
-			<p class="mb-1">&copy; 2019-2020 by Nguyen Ky Duong Truong</p>
+			<p class="mb-1">&copy; 2021 by Nguyen Ky Duong Truong</p>
 			<p class="mb-1">All Rights Reserved</p>
 		</div>
 	</footer>
