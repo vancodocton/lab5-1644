@@ -3,7 +3,7 @@
     {
         session_start();
     }
-	require 'auth/checkLogin.php';
+	//require 'auth/checkLogin.php';
 	// if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) 
 	// {
 	// 	$uri = 'https://';
