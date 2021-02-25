@@ -1,10 +1,9 @@
 <?php
     if (session_id() === '')
-    {
         session_start();
-    }
-    $url = '/auth/checkLogin.php?originURL='.$_SERVER['PHP_SELF'];
-    require($url);
+    require '../backend/dbConnect.php';
+    require '../auth/checklogin.php';
+    require '../auth/checkpermission.php';    
 ?>
 <!doctype html>
 <html lang="en">
