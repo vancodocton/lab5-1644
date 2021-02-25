@@ -3,9 +3,14 @@
 	{
 		session_start();
 	}
+	$originURL = 'Location: ' . $_SESSION['originURL'];
+	
+	if (isset($_SESSION['account_id']))		
+		header($originURL);
+
 	if (isset($_POST['signin']))
 	{
-		require('../backend/dbConnect.php');
+		require '../backend/dbConnect.php';
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
@@ -19,9 +24,11 @@
 			if ($account['password'] == $password)
 			{
 				$_SESSION['account_id'] = $account['id'];
-				$_SESSION['account_username'] = $account['username'];
-				$uri = $_SERVER['HTTP_HOST'];
-				header('Location: ' . '../index.php');
+				$_SESSION['account_username'] = $account['username'];	
+				unset($_SESSION['originURL']);		
+				unset($_POST['username']);
+				unset($_POST['password']);
+				header($originURL);
 				exit();
 			}
 		}
@@ -36,7 +43,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="/lab5-1644/css/login.css" rel="stylesheet">
   </head>
 
@@ -44,14 +51,14 @@
     <form class="w-100 m-auto p-3" style="max-width: 330px;" method="post" action="">
 		<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 		<h1 class="mb-4">Please sign in</h1>
-		<input type="username" name="username" class="form-control mb-1" placeholder="Username" required autofocus value="<?php echo isset($_POST['signin'])? $username:''; ?>">
+		<input type="username" name="username" class="form-control mb-1" placeholder="Username" required autofocus value="<?php echo isset($_POST['username'])? $username:''; ?>">
 		<input type="password" name="password" class="form-control mb-1" placeholder="Password" required>
 		<div class="form-check mt-1 mb-3 text-left">
 			<input type="checkbox" value="remember-me"> 
 			<label for="remember-me"> Remember me</label>
 		</div>		
 		<?php
-			if (isset($_POST['signin']))
+			if (isset($_POST['signin']) && !isset($_SESSION['account_id']))
 				echo '<p class="text-danger">Wrong account credential</p>';
 		?>		
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
@@ -63,10 +70,15 @@
 			<p class="mb-1">All Rights Reserved</p>
 		</div>
 	</footer>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+	<!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+    -->
+    </body>
 </html>

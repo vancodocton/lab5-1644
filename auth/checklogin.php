@@ -5,10 +5,9 @@
     }    
     if (!isset($_SESSION['account_id']))
     {
-        $uri = $_SERVER['HTTP_HOST'];
-        $header = 'Location: auth/login.php';
-        echo $header;
-        header($header);
+        $_SESSION['originURL'] = $_SERVER['PHP_SELF'];
+        $url = 'Location: /auth/login.php';
+        header($url);
         exit;
     }
 ?>

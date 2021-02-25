@@ -11,4 +11,6 @@
     {
         echo '<p>user not login</p>';
     }
+    header('Location: /');
+    exit;
 ?>
