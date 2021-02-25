@@ -1,16 +1,35 @@
+-- drop table if exists AccountRoles;
+-- create table AccountRoles
+-- (
+-- 	AccountId int not null,
+-- 	RoleId int not null,
+-- 	constraint AccountRoles_PK primary key (AccountId, RoleId),
+-- 	constraint AccountRoles_FK_AccountId foreign key (AccountId) references Accounts(Id),
+-- 	constraint AccountRoles_FK_RoleId foreign key (RoleId) references Roles(Id)
+-- );
 drop table if exists Accounts;
+drop table if exists Roles;
 drop table if exists OrderDetails;
 drop table if exists Orders;
 drop table if exists Stores;
 drop table if exists Products;
 
+create table Roles
+(
+	Id int generated always as identity,
+	Name varchar(50) not null,
+	constraint Roles_PK_Id primary key (Id),
+	constraint Roles_UK_Name unique (name)
+);
 create table Accounts
 (
 	Id int generated always as identity,
 	Username varchar(50) not null,
 	Password varchar(50) not null,
+	RoleId int not null,
 	constraint Accounts_PK_Id primary key (Id),
-	constraint Accounts_UQ_Username unique (Username)
+	constraint Accounts_UQ_Username unique (Username),
+	constraint AccountRoles_FK_RoleId foreign key (RoleId) references Roles(Id)
 );
 create table Stores
 (
@@ -45,6 +64,8 @@ create table OrderDetails
 	constraint OrderDetails_CK_UnitPrice check (UnitPrice > 0),
 	constraint OrderDetails_CK_Discount check (Discount >= 0)
 );
+
+
 
 
 
