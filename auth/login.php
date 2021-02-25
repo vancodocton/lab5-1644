@@ -11,7 +11,7 @@
 	}
 	
 	if (isset($_SESSION['account_id']))		
-		header($originURL);
+		header($_SESSION['originURL']);
 
 	if (isset($_POST['signin']))
 	{

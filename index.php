@@ -1,9 +1,9 @@
 <?php
-    // if (session_id() === '')
-    // {
-    //     session_start();
-    // }
-	// require 'auth/checkLogin.php';
+    if (session_id() === '')
+    {
+        session_start();
+    }
+	require 'auth/checkLogin.php';
 	// if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) 
 	// {
 	// 	$uri = 'https://';
