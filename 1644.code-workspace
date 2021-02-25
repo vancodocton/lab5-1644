@@ -1,0 +1,36 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [			
+			{
+				"type": "pwa-msedge",
+				"request": "launch",
+				"name": "Launch Edge against localhost",
+				"url": "http://localhost",
+				"webRoot": "${workspaceFolder}",
+				"cleanUp": "onlyTab"
+			},
+			{
+				"name": "Launch currently open script",
+				"type": "php",
+				"request": "launch",
+				"program": "${file}",
+				"stopOnEntry": true,
+				"cwd": "${fileDirname}",
+				"port" : 9000,
+				"runtimeExecutable": "C:/Bitnami/wappstack-8.0.2-0/php/php.exe"
+			},
+			{
+				"name": "Listen for XDebug",
+				"request": "launch",
+				"type": "php",
+				"port" : 9000
+			}
+		]
+	}
+}
