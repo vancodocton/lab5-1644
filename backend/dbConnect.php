@@ -4,7 +4,7 @@
     $dbName = "postgres";
     $username = "postgres";
     $password = "asdasdas";
-    $connectionstring = "host=$hostname port=$port dbname=$dbName user=$username password=$password";
+    $connectionString = "host=$hostname port=$port dbname=$dbName user=$username password=$password";
 
-    $dbServer = pg_connect($connectionstring);
+    $dbServer = pg_connect($connectionString);
 ?>

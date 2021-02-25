@@ -1,24 +1,28 @@
 <?php
-	session_start();
+	if (session_id() === '')
+	{
+		session_start();
+	}
 	if (isset($_POST['signin']))
 	{
-		include('backend/dbConnect.php');
+		require('../backend/dbConnect.php');
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 		
 		$query = "SELECT * FROM accounts WHERE username = '$username'";
-		$result = pg_query($dbServer, $query);
-		
+		$result = pg_query($dbServer, $query);		
 
 		$account = pg_fetch_assoc($result);
+		pg_close($dbServer);
 		if ($account or is_null($account))
 		{
 			if ($account['password'] == $password)
 			{
 				$_SESSION['account_id'] = $account['id'];
+				$_SESSION['account_username'] = $account['username'];
 				$uri = $_SERVER['HTTP_HOST'];
-				header('Location: ' . $uri . '/lab5-1644/');
-				exit;
+				header('Location: ' . '../index.php');
+				exit();
 			}
 		}
 	}
@@ -47,7 +51,7 @@
 			<label for="remember-me"> Remember me</label>
 		</div>		
 		<?php
-			if (isset($_POST['signin']) && isset($_SESSION['account_id']))
+			if (isset($_POST['signin']))
 				echo '<p class="text-danger">Wrong account credential</p>';
 		?>		
 		<button class="btn btn-lg btn-primary btn-block" type="submit" name="signin">Sign in</button>
