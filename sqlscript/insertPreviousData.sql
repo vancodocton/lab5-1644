@@ -1,5 +1,5 @@
-insert into Roles (Name) values ('Company Highe Manager');
-insert into Roles (Name) values('Toy Store Manager');
+insert into Roles (Name, PathAcess) values ('Company Highe Manager', 'com');
+insert into Roles (Name, PathAcess) values('Toy Store Manager', 'store');
 
 insert into Accounts (Username, Password, RoleId) values ('admin1', '123456', 1);
 insert into Accounts (Username, Password, RoleId) values ('admin2', '123123', 1);

@@ -18,6 +18,7 @@ create table Roles
 (
 	Id int generated always as identity,
 	Name varchar(50) not null,
+	PathAcess text not null,
 	constraint Roles_PK_Id primary key (Id),
 	constraint Roles_UK_Name unique (name)
 );
