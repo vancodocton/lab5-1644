@@ -1,0 +1,27 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch Edge",
+				"request": "launch",
+				"type": "pwa-msedge",
+				"url": "http://localhost:8080",
+				"webRoot": "${workspaceFolder}"
+			},
+			{
+				"type": "pwa-msedge",
+				"request": "launch",
+				"name": "Debug dashboard.html page",
+				"url": "http://localhost/dashboard.html",
+				"webRoot": "${workspaceFolder}",
+				"cleanUp": "onlyTab"
+			}
+		]
+	}
+}
