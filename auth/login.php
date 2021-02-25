@@ -1,18 +1,18 @@
 <?php
 	if (session_id() === '')
-	{
 		session_start();
-	}
+
 	if (isset($_SESSION['originURL']))
 		$originURL = 'Location: ' . $_SESSION['originURL'];
 	else
-	{
 		$originURL = 'Location: /index.php';
-	}
 	
 	if (isset($_SESSION['account_id']))		
+	{
 		header($_SESSION['originURL']);
-
+		exit();
+	}
+	
 	if (isset($_POST['signin']))
 	{
 		require '../backend/dbConnect.php';
@@ -23,13 +23,18 @@
 		$result = pg_query($dbServer, $query);		
 
 		$account = pg_fetch_assoc($result);
-		pg_close($dbServer);
+		
 		if ($account or is_null($account))
 		{
 			if ($account['password'] == $password)
 			{
+				$query = "SELECT PathAcess FROM Roles WHERE Id = " . $account['roleid'];
+
+				$_SESSION['path_acess'] = pg_fetch_row(pg_query($dbServer, $query))[0];
 				$_SESSION['account_id'] = $account['id'];
 				$_SESSION['account_username'] = $account['username'];	
+				$_SESSION['account_roleid'] = $account['roleid'];
+
 				unset($_SESSION['originURL']);		
 				unset($_POST['username']);
 				unset($_POST['password']);
@@ -37,6 +42,7 @@
 				exit();
 			}
 		}
+		pg_close($dbServer);
 	}
 ?>
 <!doctype html>

@@ -6,11 +6,8 @@
     {
         unset($_SESSION['account_id']);
         unset($_SESSION['account_username']);
-    }
-    else
-    {
-        echo '<p>user not login</p>';
-    }
-    header('Location: /');
-    exit;
+        unset($_SESSION['account_roleid']);
+        header('Location: /auth/login.php');
+    }   
+    exit();
 ?>
