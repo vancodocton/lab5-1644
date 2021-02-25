@@ -3,7 +3,12 @@
 	{
 		session_start();
 	}
-	$originURL = 'Location: ' . $_SESSION['originURL'];
+	if (isset($_SESSION['originURL']))
+		$originURL = 'Location: ' . $_SESSION['originURL'];
+	else
+	{
+		$originURL = 'Location: /index.php';
+	}
 	
 	if (isset($_SESSION['account_id']))		
 		header($originURL);
