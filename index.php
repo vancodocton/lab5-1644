@@ -13,6 +13,7 @@
 	// }
 	// $uri .= $_SERVER['HTTP_HOST'];
 	// header('Location: ' . $uri . '/sample-sidebar/');
+	echo '<p>'.$_SERVER['PHP_SELF'].'</p><br>';
 ?>
 <p>ATN Company</p>
 <button type="button" class="btn btn-primary" onclick="location.href ='./auth/logout.php'">logout</button>

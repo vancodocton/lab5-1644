@@ -10,4 +10,8 @@
         header($url);
         exit;
     }
+    else
+    {
+        echo $_SESSION['account_id'];
+    }
 ?>
