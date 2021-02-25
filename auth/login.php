@@ -55,19 +55,16 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
     <!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="/lab5-1644/css/login.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+	<link href="/lab5-1644/css/login.css" rel="stylesheet">
   </head>
 
   <body class="container text-center pt-5 bg-light">
     <form class="w-100 m-auto p-3" style="max-width: 330px;" method="post" action="">
-		<img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+		<img class="mb-4" src="../img/favicon.png" alt="" width="72" height="72">
 		<h1 class="mb-4">Please sign in</h1>
-		<input type="username" name="username" class="form-control mb-1" placeholder="Username" required autofocus value="<?php echo isset($_POST['username'])? $username:''; ?>">
-		<input type="password" name="password" class="form-control mb-1" placeholder="Password" required>
-		<div class="form-check mt-1 mb-3 text-left">
-			<input type="checkbox" value="remember-me"> 
-			<label for="remember-me"> Remember me</label>
-		</div>		
+		<input type="username" name="username" class="form-control mb-2" placeholder="Username" required autofocus value="<?php echo isset($_POST['username'])? $username:''; ?>">
+		<input type="password" name="password" class="form-control mb-4" placeholder="Password" required>		
 		<?php
 			if (isset($_POST['signin']) && !isset($_SESSION['account_id']))
 				echo '<p class="text-danger">Wrong account credential</p>';
