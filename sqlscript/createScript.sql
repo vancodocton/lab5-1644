@@ -7,11 +7,14 @@
 -- 	constraint AccountRoles_FK_AccountId foreign key (AccountId) references Accounts(Id),
 -- 	constraint AccountRoles_FK_RoleId foreign key (RoleId) references Roles(Id)
 -- );
-drop table if exists Accounts;
-drop table if exists Roles;
+
 drop table if exists OrderDetails;
 drop table if exists Orders;
 drop table if exists Stores;
+drop table if exists Accounts;
+drop table if exists Roles;
+
+drop table if exists CompanyInventory;
 drop table if exists Products;
 
 create table Roles
@@ -36,8 +39,10 @@ create table Stores
 (
 	Id int generated always as identity,
 	Name text not null,
+	ManagerAccountID int,
 	constraint Stores_PK_Id primary key (Id),
-	constraint Stores_UQ_Id unique (Name)
+	constraint Stores_UQ_Id unique (Name),
+	constraint Stores_FK_Id foreign key (ManagerAccountID) references Accounts(Id)
 );
 create table Products
 (
@@ -46,6 +51,14 @@ create table Products
 	UnitPrice int not null,
 	constraint Products_PK_Id primary key (Id),
 	constraint Products_CK_UnitPrice check (UnitPrice > 0)
+);
+create table CompanyInventory
+(
+	ProductId int not null,
+	Quantity int not null,
+	Time timestamp not null,
+	constraint CompanyInventory_PK_ProductId primary key (ProductId),
+	constraint CompanyInventory_FK_ProductId foreign key (ProductId) references Products(Id)
 );
 create table Orders
 (
