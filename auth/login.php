@@ -34,7 +34,12 @@
 				$_SESSION['account_id'] = $account['id'];
 				$_SESSION['account_username'] = $account['username'];	
 				$_SESSION['account_roleid'] = $account['roleid'];
-
+				
+				if ($_SESSION['account_roleid'] == 2)
+				{
+					$query = "SELECT * FROM Stores WHERE manageraccountid = ".$_SESSION['account_id'];
+					$_SESSION['storeid'] = pg_fetch_assoc(pg_query($dbServer, $query))['id'];
+				}
 				unset($_SESSION['originURL']);		
 				unset($_POST['username']);
 				unset($_POST['password']);
