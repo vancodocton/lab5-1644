@@ -3,7 +3,8 @@
         session_start();
     require '../backend/dbConnect.php';
     require '../auth/checklogin.php';
-    require '../auth/checkpermission.php';    
+    require '../auth/checkpermission.php';
+    
 ?>
 <!doctype html>
 <html lang="en">
@@ -15,54 +16,60 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <title>Dashboard | ATN Comapny</title>
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
 </head>
 <body class="bg-light">
-    <header class="navbar navbar-expand navbar-dark bg-dark sticky-top">
+	<!-- Navigation bar -->
+    <header class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">AATN Company</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                ATN Company
+                <a type="button" class="btn btn-primary" data-toggle="collapse" data-target="#sidebar" aria-expanded="true" aria-controls="sidebar">Sidebar</a>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navibar" aria-controls="navibar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         
-            <div class="collapse navbar-collapse">
+            <div class="collapse navbar-collapse" id="navibar">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a type="button" class="nav-link active" id="logout" href="../auth/logout.php">Logout</a>
                     </li>
                 </ul>
-                <span class="navbar-text mx-1">Hello, Admin1</span>
-                <button type="button mx-1" class="btn btn-primary" id="logout" href="logout.php">Logout</button>
             </div>
         </div>
     </header>    
 
     
     <div class="row container-fluid">
-        <aside class="col-lg-2 col-md-3 col-sm-4 bg-secondary pt-2 position-sticky collapse show" id="sidebar">
+		<!-- Side bar -->
+        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
             <div class="">
-                <nav class="nav flex-column">
-                    <a class="nav-link active" href="#">Active</a>
-                    <a class="nav-link" href="#">Link</a>
-                    <a class="nav-link" href="#">Link</a>
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </nav>
-            </div>
+				<ul class="list-group list-group-flush d-flex">
+					<li type="button" class="list-group-item bg-secondary border-white text-white" onclick="loadStores()">
+                        Store List
+                    </li>
+					<li type="button" class="list-group-item bg-secondary border-white text-white" onclick="loadProducts()">
+                        Product List
+                    </li>
+					<li type="button" class="list-group-item bg-secondary border-white text-white" onclick="loadCompanyInventory()">
+                        Company Inventory
+                    </li>
+                    <li type="button" class="list-group-item bg-secondary border-white text-white" onclick="">
+                        Sale Data
+                    </li>
+				</ul>
+			</div>
         </aside>
-        <main class="col-lg-10 col-md-9 col-sm-8 pt-2">
+		<!-- Page content -->
+        <main class="col-lg-10 col-md-9 pt-2">
             <div class="container-fluid">
-                <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#sidebar" aria-expanded="true" aria-controls="sidebar">
-                    Menu
-                </button>
-                
-                <p>hello</p>
-                <br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br>
-                <br><br><br><br><br><br><br><br><br><br><br><br>
-                <p>hello</p>
+				<div id="table-content">
+
+				</div>
             </div>
         </main>
     </div>
@@ -71,19 +78,57 @@
 
     </footer>
      <!-- Optional JavaScript; choose one of the two! -->
-
+     <script>
+		loadStores();
+		function loadStores()
+		{
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() 
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					document.getElementById("table-content").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "../backend/loadStores.php", true);
+			xhttp.send();
+		}
+		function loadProducts()
+		{
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() 
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					document.getElementById("table-content").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "../backend/loadProducts.php", true);
+			xhttp.send();
+		}
+		function loadCompanyInventory()
+		{
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() 
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					document.getElementById("table-content").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "../backend/loadCompanyInventory.php", true);
+			xhttp.send();
+		}
+        // $( window ).resize(function() {
+        //     if ($(window).width() < 768)
+        //         $('#sidebar').collapse('hide');
+        //     else
+        //         $('#sidebar').collapse('show');
+        // });
+    </script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-    <script>
-        $( window ).resize(function() {
-            if ($(window).width() < 768)
-                $('#sidebar').collapse('hide');
-            else
-                $('#sidebar').collapse('show');
-        });
-    </script>
     <!-- Option 2: Separate Popper and Bootstrap JS -->    
     <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
