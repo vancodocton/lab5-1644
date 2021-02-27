@@ -35,7 +35,7 @@ insert into CompanyInventory (ProductId, Quantity, Time) values (2, 10, CURRENT_
 insert into CompanyInventory (ProductId, Quantity, Time) values (3, 30, CURRENT_TIMESTAMP);
 insert into CompanyInventory (ProductId, Quantity, Time) values (4, 12, CURRENT_TIMESTAMP);
 insert into CompanyInventory (ProductId, Quantity, Time) values (5, 16, CURRENT_TIMESTAMP);
-insert into CompanyInventory (ProductId, Quantity, Time) values (6, 40, CURRENT_TIMESTAMP);
+--insert into CompanyInventory (ProductId, Quantity, Time) values (6, 40, CURRENT_TIMESTAMP);
 insert into CompanyInventory (ProductId, Quantity, Time) values (7, 42, CURRENT_TIMESTAMP);
 insert into CompanyInventory (ProductId, Quantity, Time) values (8, 10, CURRENT_TIMESTAMP);
 
