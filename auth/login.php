@@ -2,14 +2,12 @@
 	if (session_id() === '')
 		session_start();
 
-	if (isset($_SESSION['originURL']))
-		$originURL = 'Location: ' . $_SESSION['originURL'];
-	else
-		$originURL = 'Location: /index.php';
+	if (!isset($_SESSION['originURL']))
+		$_SESSION['originURL'] = 'Location: /index.php';
 	
 	if (isset($_SESSION['account_id']))		
 	{
-		header($_SESSION['originURL']);
+		header('Location: '.$_SESSION['originURL']);
 		exit();
 	}
 	
@@ -40,10 +38,9 @@
 					$query = "SELECT * FROM Stores WHERE manageraccountid = ".$_SESSION['account_id'];
 					$_SESSION['storeid'] = pg_fetch_assoc(pg_query($dbServer, $query))['id'];
 				}
-				unset($_SESSION['originURL']);		
 				unset($_POST['username']);
 				unset($_POST['password']);
-				header($originURL);
+				header('Location: '.$_SESSION['originURL']);
 				exit();
 			}
 		}
