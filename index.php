@@ -9,7 +9,7 @@
             $url = 'Location: /com/dashboard.php';
             break;
         case 2:
-            $url = 'Location: /store/';
+            $url = 'Location: /store/dashboard.php';
             break;
         default:
             require $_SERVER['DOCUMENT_ROOT'] . '/permissiondeny.html';
