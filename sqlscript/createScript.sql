@@ -13,7 +13,6 @@ drop table if exists Orders;
 drop table if exists Stores;
 drop table if exists Accounts;
 drop table if exists Roles;
-
 drop table if exists CompanyInventory;
 drop table if exists Products;
 
