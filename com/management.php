@@ -93,6 +93,7 @@
         //     else
         //         $('#sidebar').collapse('show');
         // });
+        
         addProduct();
         function addProduct()
         {
