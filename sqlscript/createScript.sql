@@ -8,13 +8,13 @@
 -- 	constraint AccountRoles_FK_RoleId foreign key (RoleId) references Roles(Id)
 -- );
 
-drop table if exists OrderDetails;
-drop table if exists Orders;
+-- drop table if exists OrderDetails;
+-- drop table if exists Orders;
+drop table if exists CompanyInventory;
+drop table if exists StoreInventory;
 drop table if exists Stores;
 drop table if exists Accounts;
 drop table if exists Roles;
-drop table if exists CompanyInventory;
-drop table if exists StoreInventory;
 drop table if exists Products;
 
 create table Roles
