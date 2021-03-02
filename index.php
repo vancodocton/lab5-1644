@@ -6,7 +6,7 @@
 	switch ($_SESSION['account_roleid'])
     {
         case 1:
-            $url = 'Location: /com/';
+            $url = 'Location: /com/dashboard.php';
             break;
         case 2:
             $url = 'Location: /store/';
