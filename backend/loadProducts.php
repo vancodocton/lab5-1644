@@ -1,7 +1,7 @@
 <?php
 	require '../backend/dbConnect.php';
 	
-	$query = "SELECT * FROM products;";
+	$query = "SELECT * FROM products ORDER BY Id;";
 	$result = pg_query($dbServer, $query);
 	$stocks = pg_fetch_all($result, PGSQL_ASSOC);
 	
