@@ -15,7 +15,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>Dashboard | ATN Comapny</title>
+    <title>Management | ATN Comapny</title>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
     <style>
         aside a
@@ -52,24 +52,24 @@
     
     <div class="row container-fluid">
 		<!-- Side bar -->
-        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
+        <aside class="col-lg-2 col-md-3 bg-secondary px-0 pt-2 collapse show" id="sidebar">
             <div class="">
 				<ul class="list-group list-group-flush d-flex">
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         Hello, <?php echo htmlspecialchars($_SESSION['account_username']);?>
                     </li>
-                    <li class="list-group-item bg-secondary border-white text-white">
-                        Managed Stores, <?php echo htmlspecialchars($_SESSION['storename']);?>
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
+                        Store: <?php echo htmlspecialchars($_SESSION['storename']);?>
                     </li>
-					<a type="button" class="list-group-item bg-secondary border-white text-white" href="dashboard.php">
+					<a class="list-group-item px-2 bg-secondary border-white text-white" type="button" href="dashboard.php">
                         Dashboard
                     </a>
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         <a type="button" href="#">Management</a>
                         <nav class="nav flex-column">
-                            <a type ="button" class="nav-link active" onclick="">Add order</a>
-                            <a type ="button" class="nav-link" onclick="">Function not developed</a>
-                            <a type ="button" class="nav-link" onclick="">Function not developed</a>
+                            <a type ="button" class="nav-link px-2" onclick="inventoryImport()">Import Products to Inventory</a>
+                            <a type ="button" class="nav-link px-2" onclick="inventoryExport()">Export Products to Inventory</a>
+                            <a type ="button" class="nav-link px-2" onclick="">Function not developed</a>
                         </nav>
                     </li>
 				</ul>
@@ -88,15 +88,17 @@
     <footer>
         
     </footer>
+
      <!-- Optional JavaScript; choose one of the two! -->
-     <script>
+    <script>
         // $( window ).resize(function() {
         //     if ($(window).width() < 768)
         //         $('#sidebar').collapse('hide');
         //     else
         //         $('#sidebar').collapse('show');
         // });
-        function addProduct()
+        inventoryImport();
+        function inventoryImport()
         {
             var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() 
@@ -106,10 +108,10 @@
 					document.getElementById("table-content").innerHTML = this.responseText;
 				}
 			};
-			xhttp.open("GET", "./addproduct.html", true);
+			xhttp.open("GET", "./inventoryImport.html", true);
 			xhttp.send();
         }
-        function updateProductPrice()
+        function inventoryExport()
         {
             var xhttp = new XMLHttpRequest();
 			xhttp.onreadystatechange = function() 
@@ -119,7 +121,7 @@
 					document.getElementById("table-content").innerHTML = this.responseText;
 				}
 			};
-			xhttp.open("GET", "./updateproductprice.html", true);
+			xhttp.open("GET", "./inventoryExport.html", true);
 			xhttp.send();
         }
     </script>

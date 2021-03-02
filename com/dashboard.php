@@ -51,21 +51,21 @@
     
     <div class="row container-fluid">
 		<!-- Side bar -->
-        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
+        <aside class="col-lg-2 col-md-3 bg-secondary px-0 pt-2 collapse show" id="sidebar">
             <div class="">
 				<ul class="list-group list-group-flush d-flex">
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         Hello, <?php echo htmlspecialchars($_SESSION['account_username']);?>
                     </li>
-					<li class="list-group-item bg-secondary border-white text-white">
+					<li class="list-group-item px-2 bg-secondary border-white text-white">
                         <a type="button">Dashboard</a>
                         <nav class="nav flex-column">
-                            <a type ="button" class="nav-link" onclick="loadStores()">Stores List</a>
-                            <a type ="button" class="nav-link" onclick="loadProducts()">Products List</a>
-                            <a type ="button" class="nav-link" onclick="loadCompanyInventory()">Company Inventory</a>
+                            <a type ="button" class="nav-link px-2" onclick="loadStores()">Stores List</a>
+                            <a type ="button" class="nav-link px-2" onclick="loadProducts()">Products List</a>
+                            <a type ="button" class="nav-link px-2" onclick="loadCompanyInventory()">Company Inventory</a>
                         </nav>
                     </li>
-                    <a type="button" class="list-group-item bg-secondary border-white text-white" href="management.php">
+                    <a class="list-group-item px-2 bg-secondary border-white text-white" type="button" href="management.php">
                         Management
                     </a>
 				</ul>

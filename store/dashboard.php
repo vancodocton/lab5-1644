@@ -51,22 +51,23 @@
     
     <div class="row container-fluid">
 		<!-- Side bar -->
-        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
+        <aside class="col-lg-2 col-md-3 bg-secondary px-0 pt-2 collapse show" id="sidebar">
             <div class="">
 				<ul class="list-group list-group-flush d-flex">
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         Hello, <?php echo htmlspecialchars($_SESSION['account_username']);?>
                     </li>
-                    <li class="list-group-item bg-secondary border-white text-white">
-                        Managed Stores, <?php echo htmlspecialchars($_SESSION['storename']);?>
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
+                        Store: <?php echo htmlspecialchars($_SESSION['storename']);?>
                     </li>
-					<li class="list-group-item bg-secondary border-white text-white">
+					<li class="list-group-item px-2 bg-secondary border-white text-white">
                         <a type="button">Dashboard</a>
                         <nav class="nav flex-column">
-                            <a type ="button" class="nav-link" onclick="loadProducts()">Products List</a>
+                            <a type ="button" class="nav-link px-2" onclick="loadProducts()">Products List</a>
+                            <a type ="button" class="nav-link px-2" onclick="loadStoreInventory()">Store Inventory</a>
                         </nav>
                     </li>
-                    <a type="button" class="list-group-item bg-secondary border-white text-white" href="management.php">
+                    <a class="list-group-item px-2 bg-secondary border-white text-white" type="button" href="management.php">
                         Management
                     </a>
 				</ul>
@@ -99,6 +100,19 @@
 				}
 			};
 			xhttp.open("GET", "../backend/loadProducts.php", true);
+			xhttp.send();
+		}
+        function loadStoreInventory()
+		{
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function() 
+			{
+				if (this.readyState == 4 && this.status == 200) 
+				{
+					document.getElementById("table-content").innerHTML = this.responseText;
+				}
+			};
+			xhttp.open("GET", "../backend/loadStoreInventory.php", true);
 			xhttp.send();
 		}
         // $( window ).resize(function() {

@@ -15,7 +15,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>Dashboard | ATN Comapny</title>
+    <title>Management | ATN Comapny</title>
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
     <style>
         aside a
@@ -52,21 +52,21 @@
     
     <div class="row container-fluid">
 		<!-- Side bar -->
-        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
+        <aside class="col-lg-2 col-md-3 bg-secondary pt-2 px-0 collapse show" id="sidebar">
             <div class="">
 				<ul class="list-group list-group-flush d-flex">
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         Hello, <?php echo htmlspecialchars($_SESSION['account_username']);?>
                     </li>
-					<a type="button" class="list-group-item bg-secondary border-white text-white" href="dashboard.php">
+					<a class="list-group-item px-2 bg-secondary border-white text-white" type="button" href="dashboard.php">
                         Dashboard
                     </a>
-                    <li class="list-group-item bg-secondary border-white text-white">
+                    <li class="list-group-item px-2 bg-secondary border-white text-white">
                         <a type="button" href="#">Management</a>
                         <nav class="nav flex-column">
-                            <a type ="button" class="nav-link active" onclick="addProduct()">Add product</a>
-                            <a type ="button" class="nav-link" onclick="updateProductPrice()">Update product price</a>
-                            <a type ="button" class="nav-link" href="#">Function not developed</a>
+                            <a type ="button" class="nav-link px-2" onclick="addProduct()">Add product</a>
+                            <a type ="button" class="nav-link px-2" onclick="updateProductPrice()">Update product price</a>
+                            <a type ="button" class="nav-link px-2" href="#">Function not developed</a>
                         </nav>
                     </li>
 				</ul>
@@ -93,6 +93,7 @@
         //     else
         //         $('#sidebar').collapse('show');
         // });
+        addProduct();
         function addProduct()
         {
             var xhttp = new XMLHttpRequest();
