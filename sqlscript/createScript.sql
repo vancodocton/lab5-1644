@@ -14,6 +14,7 @@ drop table if exists Stores;
 drop table if exists Accounts;
 drop table if exists Roles;
 drop table if exists CompanyInventory;
+drop table if exists StoreInventory;
 drop table if exists Products;
 
 create table Roles
@@ -59,24 +60,34 @@ create table CompanyInventory
 	constraint CompanyInventory_PK_ProductId primary key (ProductId),
 	constraint CompanyInventory_FK_ProductId foreign key (ProductId) references Products(Id)
 );
-create table Orders
+create table StoreInventory
 (
-	Id int generated always as identity,
-	StoreId int not null,
-	Date timestamp default NOW(),
-	constraint Orders_PK_Id primary key (Id),
-	constraint Orders_FK_StoreID foreign key (StoreId) references Stores(Id)
-);
-create table OrderDetails
-(
-	OrderId int not null,
 	ProductId int not null,
-	UnitPrice int not null,
-	Discount int default 0,
-	constraint OrderDetails_PK_OrderId_ProductId primary key (OrderId, ProductId),
-	constraint OrderDetails_CK_UnitPrice check (UnitPrice > 0),
-	constraint OrderDetails_CK_Discount check (Discount >= 0)
+	StoreId int not null,
+	Quantity int not null,
+	Time timestamp not null,
+	constraint StoreInventory_PK_ProductId primary key (ProductId, StoreId),
+	constraint StoreInventory_FK_ProductId foreign key (ProductId) references Products(Id),
+	constraint StoreInventory_FK_StoreID foreign key (StoreId) references Stores(Id)
 );
+-- create table Orders
+-- (
+-- 	Id int generated always as identity,
+-- 	StoreId int not null,
+-- 	Date timestamp default NOW(),
+-- 	constraint Orders_PK_Id primary key (Id),
+-- 	constraint Orders_FK_StoreID foreign key (StoreId) references Stores(Id)
+-- );
+-- create table OrderDetails
+-- (
+-- 	OrderId int not null,
+-- 	ProductId int not null,
+-- 	UnitPrice int not null,
+-- 	Discount int default 0,
+-- 	constraint OrderDetails_PK_OrderId_ProductId primary key (OrderId, ProductId),
+-- 	constraint OrderDetails_CK_UnitPrice check (UnitPrice > 0),
+-- 	constraint OrderDetails_CK_Discount check (Discount >= 0)
+-- );
 
 
 
