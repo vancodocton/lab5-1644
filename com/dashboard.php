@@ -54,6 +54,9 @@
         <aside class="col-lg-2 col-md-3 bg-secondary pt-2 collapse show" id="sidebar">
             <div class="">
 				<ul class="list-group list-group-flush d-flex">
+                    <li class="list-group-item bg-secondary border-white text-white">
+                        Hello, <?php echo htmlspecialchars($_SESSION['account_username']);?>
+                    </li>
 					<li class="list-group-item bg-secondary border-white text-white">
                         <a type="button">Dashboard</a>
                         <nav class="nav flex-column">
