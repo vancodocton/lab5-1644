@@ -37,6 +37,7 @@
 				{
 					$query = "SELECT * FROM Stores WHERE manageraccountid = ".$_SESSION['account_id'];
 					$_SESSION['storeid'] = pg_fetch_assoc(pg_query($dbServer, $query))['id'];
+					$_SESSION['storename'] = pg_fetch_assoc(pg_query($dbServer, $query))['name'];
 				}
 				unset($_POST['username']);
 				unset($_POST['password']);
