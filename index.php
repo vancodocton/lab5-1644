@@ -18,5 +18,3 @@
 	header($url);
 	exit();
 ?>
-<p>ATN Company</p>
-<button type="button" class="btn btn-primary" onclick="location.href ='./auth/logout.php'">logout</button>
